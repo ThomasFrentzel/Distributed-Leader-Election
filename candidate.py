@@ -3,37 +3,37 @@
 import etcd3
 from sys import argv
 
-chave_lider = "lider"
-chave_lock = "eleicao_lider"
+leader_key = "leader"
+election_lock_key = "election_leader"
 
-def busca_lideranca(candidato_id):
+def search_leadership(candidate_id):
     client = etcd3.client()
 
-    ultimo_lider = None
+    last_leader = None
 
     while True:
-        client.watch(chave_lider)
+        client.watch(leader_key)
 
-        with client.lock(chave_lock):
-            lider = client.get(chave_lider)[0]
+        with client.lock(election_lock_key):
+            leader = client.get(leader_key)[0]
             
-            if lider:
-                lider = lider.decode('utf-8')
-                if lider == candidato_id:
+            if leader:
+                leader = leader.decode('utf-8')
+                if leader == candidate_id:
                     input("Press ENTER to finish...")
-                    client.delete(chave_lider)
+                    client.delete(leader_key)
                     print("End")
                     break
                                
-                elif lider != ultimo_lider:
-                    print(f"{lider} is the leader...")
-                    ultimo_lider = lider
+                elif leader != last_leader:
+                    print(f"{leader} is the leader...")
+                    last_leader = leader
             else:
                 print("Attempting leadership...")
                 print("I am the LEADER!")
-                client.put(chave_lider, candidato_id)
-                ultimo_lider = None
+                client.put(leader_key, candidate_id)
+                last_leader = None
 
 if __name__ == "__main__":
-    candidato_id = argv[1]
-    busca_lideranca(candidato_id)
+    candidate_id = argv[1]
+    search_leadership(candidate_id)

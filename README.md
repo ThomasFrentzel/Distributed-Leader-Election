@@ -2,8 +2,6 @@
 
 A Python implementation of a simple Distributed Leader Election system using the etcd library. This project demonstrates how that by only using  basic etcd API operations (`get`, `put`, `delete`, `lock`, `lease`, `refresh`, `watch`, `watch_once`) to ensure that only one process becomes the leader at a given time.
 
-## Introduction
-This project implements a distributed leader election algorithm where:
 - Each candidate has a unique identifier.
 - Candidates compete to become the leader by interacting with the etcd key-value store.
 - If a leader already exists, candidates wait for the leader to terminate or abort before trying again.

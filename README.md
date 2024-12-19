@@ -1,18 +1,25 @@
-# Distributed-Leader-Election
+# Distributed Leader Election
 
-A Python implementation of a simple Distributed Leader Election system using the etcd library. This project demonstrates how that by only using  basic etcd API operations (`get`, `put`, `delete`, `lock`, `lease`, `refresh`, `watch`, `watch_once`) to ensure that only one process becomes the leader at a given time.
-
-- Each candidate has a unique identifier.
-- Candidates compete to become the leader by interacting with the etcd key-value store.
-- If a leader already exists, candidates wait for the leader to terminate or abort before trying again.
-
-The implementation ensures that only one process can become the leader at any time, providing a simple, robust solution to leader election in distributed systems.
+A Python implementation of a simple Distributed Leader Election system using the etcd library. This project demonstrates how to ensure that only one process becomes the leader at a given time by using basic etcd API operations (`get`, `put`, `delete`, `lock`, `lease`, `refresh`, `watch`, `watch_once`).
 
 ## Features
 - Distributed leader election using etcd.
 - Automatic waiting for leader availability.
-- Use of basic etcd operations: `get`, `put`, `delete`, `lock`, `watch`.
 - Fault-tolerant: automatically elects a new leader if the current leader crashes or exits.
+- Each candidate has a unique identifier.
+- Candidates compete to become the leader by interacting with the etcd key-value store.
+- If a leader already exists, candidates wait for the leader to terminate or abort before trying again.
+
+
+The implementation ensures that only one process can become the leader at any time, providing a simple, robust solution to leader election in distributed systems.
+
+## Operations Used
+- `get`: Checks the current leader stored in `leader_key`.
+- `put`: Claims leadership by writing the candidate's ID to `leader_key`.
+- `delete`: Removes the leader's ID from `leader_key` once the leader has finished their execution.
+- `lock`: Ensures only one candidate can attempt leadership at a time by preventing concurrent access to the critical section of code.
+- `watch`: Tracks changes in the leadership key (`leader_key`), allowing candidates to react when the leadership status changes.
+
 
 # Usage  
 

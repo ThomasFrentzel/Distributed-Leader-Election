@@ -3,7 +3,7 @@
 A Python implementation of a simple Distributed Leader Election system using the etcd library. This project demonstrates how to ensure that only one process becomes the leader at a given time by using basic etcd API operations (`get`, `put`, `delete`, `lock`, `lease`, `refresh`, `watch`, `watch_once`).
 
 ## Features
-- Distributed leader election using etcd.
+
 - Automatic waiting for leader availability.
 - Fault-tolerant: automatically elects a new leader if the current leader crashes or exits.
 - Each candidate has a unique identifier.
@@ -65,3 +65,4 @@ End                                 Attempting leadership...             Attempt
 ## Clone the repository:
    ```bash
    git clone https://github.com/ThomasFrentzel/Distributed-Leader-Election
+ ```

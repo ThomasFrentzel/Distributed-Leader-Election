@@ -1,6 +1,6 @@
 # Distributed Leader Election
 
-A Python implementation of a simple Distributed Leader Election system using the etcd library. This project demonstrates how to ensure that only one process becomes the leader at a given time by using basic etcd API operations (`get`, `put`, `delete`, `lock`, `lease`, `refresh`, `watch`, `watch_once`).
+A Python implementation of a Distributed Leader Election system using the etcd library. This project demonstrates how to ensure that only one process becomes the leader at a given time by using basic etcd API operations (`get`, `put`, `delete`, `lock`, `lease`, `refresh`, `watch`, `watch_once`).
 
 ## Features
 
